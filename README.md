@@ -28,7 +28,7 @@
 >> 5. . ~/catkin_ws/devel/setup.bash
 >>
 >>> #### Install ros_lib into the Arduino Environment
->>>> 1. roscd tank_motor/installArduinoIDE/
+>>>> 1. roscd tank_motor/
 >>>> 2. ./installArduinoIDE.sh
 
 # Usage
