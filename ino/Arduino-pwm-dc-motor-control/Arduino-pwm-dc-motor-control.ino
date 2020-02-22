@@ -10,6 +10,8 @@ int M1 = 4;
 int E2 = 6;
 int M2 = 7;
 
+int value = 100;
+
 /*Direction Control*/
 /*Backward*/
 /*digitalWrite(M1,HIGH);*/
@@ -32,11 +34,11 @@ void setup()
 
 void loop()
 {
-	int value;
-	for(value = 0 ; value <= 255; value+=5)
+//	int value;
+//	for(value = 0 ; value <= 255; value+=5)
 	{
 /*		Direction Control*/
-		digitalWrite(M1,HIGH);
+		digitalWrite(M1,LOW);
 		digitalWrite(M2,LOW);
 /*		PWM Speed Control*/
 		analogWrite(E1, value);
