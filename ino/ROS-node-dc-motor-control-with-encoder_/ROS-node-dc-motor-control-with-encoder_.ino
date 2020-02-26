@@ -7,8 +7,7 @@
 /*include necessary library*/
 #include <ros.h>
 #include <geometry_msgs/Twist.h>
-
-ros::NodeHandle nh;
+#include <std_msgs/Float32.h>
 
 /*Arduino PWM Speed Control*/
 /*1. Left*/
@@ -32,20 +31,6 @@ int M2 = 7;
  */
 volatile signed int TEMP_LEFT, COUNTER_LEFT = 0; 
 volatile signed int TEMP_RIGHT, COUNTER_RIGHT = 0;
-
-/*Direction Control*/
-/*Backward*/
-/*digitalWrite(M1,HIGH);*/
-/*digitalWrite(M2, HIGH);*/
-/*Forward*/
-/*digitalWrite(M1,LOW);*/
-/*digitalWrite(M2, LOW);*/
-/*Left*/
-/*digitalWrite(M1,HIGH);*/
-/*digitalWrite(M2, LOW);*/
-/*Right*/
-/*digitalWrite(M1,LOW);*/
-/*digitalWrite(M2, HIGH);*/
 
 #define wheelSep 0.14 // mm
 #define wheelRadius 0.05; // mm
@@ -155,7 +140,13 @@ void motorDirection()
 	}
 }
 
+//Set up the ros node (publisher and subscriber)
+std_msgs::Float32 encLeft;
+std_msgs::Float32 encRight;
+ros::Publisher pub_encLeft("left_encoder", &encLeft);
+ros::Publisher pub_encRight("right_encoder", &encRight);
 ros::Subscriber<geometry_msgs::Twist> sub("/cmd_vel", messageCb);
+ros::NodeHandle nh;
 
 //put your setup code here, to run once:
 void setup()
@@ -186,14 +177,22 @@ void setup()
 	pinMode(M2, OUTPUT);
 
 	nh.initNode();
+  nh.advertise(pub_encLeft);
+  nh.advertise(pub_encRight);
 	nh.subscribe(sub);
 }
 
 //put your main code here, to run repeatedly:
 void loop()
 {
+  encLeft.data = COUNTER_LEFT;
+  encRight.data = COUNTER_RIGHT;
+
+  pub_encLeft.publish(&encLeft);
+  pub_encRight.publish(&encRight);
+  
 	nh.spinOnce();
-	delay(1);
+	delay(10);
 }
 
  /*
