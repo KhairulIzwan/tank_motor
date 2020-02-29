@@ -48,7 +48,7 @@ float rightPower;
 char transVel[10];
 char rotVel[10];
 
-int min_speed=180;
+int min_speed=130;
 
 void messageCb(const geometry_msgs::Twist &msg)
 {

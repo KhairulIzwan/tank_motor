@@ -10,7 +10,7 @@ int M1 = 4;
 int E2 = 6;
 int M2 = 7;
 
-int value = 130;
+int value = 150;
 
 /* 
  * ROTARY ENCODER PINS (CHANGE ACCORDINGLY)
@@ -80,8 +80,8 @@ void loop()
 //  for(value = 0 ; value <= 255; value+=5)
   {
 /*    Direction Control*/
-    digitalWrite(M1,HIGH);
-    digitalWrite(M2,HIGH);
+    digitalWrite(M1,LOW);
+    digitalWrite(M2,LOW);
 /*    PWM Speed Control*/
     analogWrite(E1, value);
     analogWrite(E2, value);
