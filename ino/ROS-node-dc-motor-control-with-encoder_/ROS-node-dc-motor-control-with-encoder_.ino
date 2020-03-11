@@ -225,8 +225,8 @@ void messageCb_reset_leftEnc(const std_msgs::Bool &msg)
 
 void messageCb_reset_rightEnc(const std_msgs::Bool &msg)
 {
-  if (msg.data == true)
-  {
-    COUNTER_RIGHT = 0;
-  }
+	if (msg.data == true)
+	{
+		COUNTER_RIGHT = 0;
+	}
 }
